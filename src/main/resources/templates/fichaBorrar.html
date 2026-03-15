@@ -28,6 +28,11 @@
             <span th:text="${pelicula.genero?.nombre}">Genero</span>
         </p>
 
+        <p th:if="${pelicula.descripcion != null and !#strings.isEmpty(pelicula.descripcion)}">
+            <strong>Descripción:</strong>
+            <span th:text="${pelicula.descripcion}">Descripción</span>
+        </p>
+
        <!-- <p>
             <strong>ID:</strong>
             <span th:text="${pelicula.id}">1</span>

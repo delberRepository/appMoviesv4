@@ -16,6 +16,8 @@ public class Peliculas {
     private String director;
     private String imgUrl;
     private String videoUrl;
+    @Column(columnDefinition = "text")
+    private String descripcion;
     @ManyToOne
     @JoinColumn(name = "genero_id")
     private Genero genero;
@@ -48,6 +50,7 @@ public class Peliculas {
                 ", director='" + director + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", videoUrl='" + videoUrl + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 ", genero=" + genero +
                 '}';
     }

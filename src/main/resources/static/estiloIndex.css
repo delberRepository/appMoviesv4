@@ -97,6 +97,7 @@ input, select{
     border-radius:6px;
     overflow:hidden;
     transition:0.3s;
+    padding-bottom: 20px;
 }
 
 .card:hover{
