@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha Película</title>
     <link rel="stylesheet" th:href="@{/estiloBorrar.css}">
 </head>
@@ -25,14 +25,14 @@
 
         <p>
             <strong>Género:</strong>
-            <span th:text="${pelicula.genero.nombre}">Genero</span>
+            <span th:text="${pelicula.genero?.nombre}">Genero</span>
         </p>
 
-        <p>
+       <!-- <p>
             <strong>ID:</strong>
             <span th:text="${pelicula.id}">1</span>
-        </p>
-        <div >
+        </p>-->
+        <div class="video-container">
             <iframe width="560" height="315" th:src="'https://www.youtube.com/embed/' + ${pelicula?.videoUrl}"
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
