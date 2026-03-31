@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="estiloNavbar.css">
+    <link rel="stylesheet" th:href="@{/estiloNavbar.css}">
     <style>
 
     </style>
@@ -9,8 +10,27 @@
 <body>
 <nav th:fragment="navBar">
     <ul class="navbar">
-        <li><a href="/">Home</a></li>
-        <li><a href="/createMovie">New movie</a></li>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/createMovie}">New movie</a></li>
+
+        <li style="margin-left:auto;"></li>
+
+        <!-- NO LOGUEADO -->
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Login</a>
+        </li>
+
+        <!-- LOGUEADO -->
+        <li sec:authorize="isAuthenticated()">
+            <span sec:authentication="name"></span>
+        </li>
+
+        <li sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+
     </ul>
 </nav>
 </body>

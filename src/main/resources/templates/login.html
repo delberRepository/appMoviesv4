@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/estiloNavbar.css}">
+    <link rel="stylesheet" th:href="@{/estiloIndex.css}">
+</head>
+<body>
+<span th:replace="fragment_navbar :: navBar"></span>
+
+<h2>Iniciar sesión</h2>
+
+<form th:action="@{/login}" method="post">
+    <div>
+        <label>Usuario:</label>
+        <input type="text" name="username" />
+    </div>
+
+    <div>
+        <label>Contraseña:</label>
+        <input type="password" name="password" />
+    </div>
+
+    <button type="submit">Entrar</button>
+</form>
+
+</body>
+</html>

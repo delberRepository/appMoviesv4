@@ -1,5 +1,6 @@
 package com.cursospring.bibliopelis.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -12,7 +13,8 @@ public class Genero{
     private String nombre;
 
     @OneToMany(mappedBy = "genero")
-    private List<Peliculas> peliculas;
+    @JsonManagedReference
+    private List<Pelicula> peliculas;
 
     public Genero() {}
 
@@ -26,7 +28,7 @@ public class Genero{
         this.id = id;
     }
 
-    public Genero(int id, String nombre, List<Peliculas> peliculas) {
+    public Genero(int id, String nombre, List<Pelicula> peliculas) {
         this.id = id;
         this.nombre = nombre;
         this.peliculas = peliculas;
@@ -47,11 +49,11 @@ public class Genero{
         this.nombre = nombre;
     }
 
-    public List<Peliculas> getPeliculas() {
+    public List<Pelicula> getPeliculas() {
 
         return peliculas;
     }
-    public void setPeliculas(List<Peliculas> peliculas) {
+    public void setPeliculas(List<Pelicula> peliculas) {
         this.peliculas = peliculas;
     }
 }

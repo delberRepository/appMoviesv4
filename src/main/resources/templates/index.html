@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Películas</title>
-    <link rel="stylesheet" href="estiloIndex.css">
+    <link rel="stylesheet" th:href="@{/estiloIndex.css}">
+    <link rel="stylesheet" th:href="@{/estiloNavbar.css}">
 </head>
 
 <body>
@@ -44,8 +45,9 @@
     <div class="grid">
 
         <div class="card" th:each="p : ${peliculas}">
-
+            <a th:href="@{/verFicha/{id}(id=${p.id})}" >
             <img th:src="${p.imgUrl}" alt="poster pelicula">
+            </a>
 
             <div class="card-content">
 

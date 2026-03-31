@@ -1,26 +1,28 @@
 package com.cursospring.bibliopelis.controller;
 
 import com.cursospring.bibliopelis.model.Genero;
-import com.cursospring.bibliopelis.model.Peliculas;
-import com.cursospring.bibliopelis.repository.IGenereRepository;
+import com.cursospring.bibliopelis.model.Pelicula;
+import com.cursospring.bibliopelis.model.Review;
+import com.cursospring.bibliopelis.model.Usuario;
 import com.cursospring.bibliopelis.services.GenereServices;
 import com.cursospring.bibliopelis.services.MovieServices;
+import com.cursospring.bibliopelis.services.ReviewServices;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@AllArgsConstructor
 @Controller
 public class MainController {
     private GenereServices gs;
     private MovieServices ms;
+    private ReviewServices rs;
 
-    public MainController(GenereServices gs, MovieServices ms) {
-        this.ms = ms;
-        this.gs = gs;
 
-    }
     //aqui le inyecto el genereServices, es decir se inyectan servicios y repositorios
 
     @GetMapping("/")
@@ -31,8 +33,8 @@ public class MainController {
         model.addAttribute("generos", generosList);
 
         //OBTENER PELIS DEL SERVICIO
-        List<Peliculas> peliculasList =ms.getAllPeliculas();
-        model.addAttribute("peliculas",peliculasList);
+        List<Pelicula> peliculaList =ms.getAllPeliculas();
+        model.addAttribute("peliculas", peliculaList);
 
 
         return "index";
@@ -41,7 +43,7 @@ public class MainController {
 
     @GetMapping("/createMovie")
     public String createMovie(Model model) {
-        model.addAttribute("pelicula", new Peliculas());
+        model.addAttribute("pelicula", new Pelicula());
 
         //OBTENER PELIS DEL SERVICIO y LOS AÑADE A OBJETO MODELO
         List<Genero> generosList = gs.getAllGeneros();
@@ -50,21 +52,23 @@ public class MainController {
     }
 
     @PostMapping("/createMovie")
-    public String createMovie(@ModelAttribute Peliculas pelicula){
+    public String createMovie(@ModelAttribute Pelicula pelicula){
         this.ms.crearPelicula(pelicula);
         return "redirect:/";
     }
     @GetMapping("/verFicha/{id}")
     public String verFicha(@PathVariable int id, Model model) {
 
-        Peliculas pelicula = ms.getPeliculaById(id);
+        Pelicula pelicula = ms.getPeliculaById(id);
         //aqui llamo al metodo para extraer el identificador y
         //luego vuelvo a cagar en la variable videoUrl.
         String videoId = ms.extractYoutubeId(pelicula.getVideoUrl());
         pelicula.setVideoUrl(videoId);
+        // 🔥 AÑADIR REVIEWS
+        List<Review> reviews = rs.getReviewsByPelicula(id);
 
         model.addAttribute("pelicula", pelicula);
-
+        model.addAttribute("reviews", reviews);
         return "fichaBorrar";
     }
     @PostMapping("/deleteMovie/{id}")
@@ -76,10 +80,42 @@ public class MainController {
    @PostMapping("/searchMovie")
     public String searchMovie(@RequestParam String searchTitle, @RequestParam Integer searchGenero,Model model){
        List<Genero> generosList = gs.getAllGeneros();
-       List<Peliculas> peliculasList =ms.findByTitleAndGenero(searchTitle,searchGenero);
+       List<Pelicula> peliculaList =ms.findByTitleAndGenero(searchTitle,searchGenero);
        model.addAttribute("generos",generosList);
-       model.addAttribute("peliculas",peliculasList);
+       model.addAttribute("peliculas", peliculaList);
        return"index";
+    }
+    @PostMapping("/addReview")
+    public String addReview(@RequestParam String contenido,
+                            @RequestParam int rating,
+                            @RequestParam int peliculaId)
+                            {
+
+        Review review = new Review();
+        review.setContenido(contenido);
+        review.setRating(rating);
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuarioLogueado = (Usuario) auth.getPrincipal();
+
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioLogueado.getId());
+
+        Pelicula pelicula = new Pelicula();
+        pelicula.setId(peliculaId);
+
+        review.setUsuario(usuario);
+        review.setPelicula(pelicula);
+
+        rs.crearReview(review);
+
+        return "redirect:/verFicha/" + peliculaId;
+    }
+//LOGIN
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
 

@@ -1,0 +1,36 @@
+.navbar{
+    display:flex;
+    align-items:center;
+    list-style:none;
+    margin:0;
+    padding:0 40px;
+    height:60px;
+}
+button{
+    background:#e50914;
+    border:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#f6121d;
+}
+
+.navbar li{
+    margin-right:30px;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:#e5e5e5;
+    font-size:16px;
+    font-weight:500;
+    transition:color 0.3s ease;
+}
+
+.navbar a:hover{
+    color:#e50914;
+}

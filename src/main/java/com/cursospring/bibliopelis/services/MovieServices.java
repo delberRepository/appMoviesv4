@@ -1,33 +1,29 @@
 package com.cursospring.bibliopelis.services;
 
-import com.cursospring.bibliopelis.model.Genero;
-import com.cursospring.bibliopelis.model.Peliculas;
-import com.cursospring.bibliopelis.repository.IPeliculasRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.cursospring.bibliopelis.model.Pelicula;
+import com.cursospring.bibliopelis.repository.IPeliculaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieServices {
 
-    private IPeliculasRepository peliculasRepository;
+    private IPeliculaRepository peliculasRepository;
 
 
-    public MovieServices(IPeliculasRepository peliculasRepository) {
+    public MovieServices(IPeliculaRepository peliculasRepository) {
         this.peliculasRepository = peliculasRepository;
     }
 
     //OBTENER TODAS LAS PELICULAS
-    public List<Peliculas> getAllPeliculas(){
+    public List<Pelicula> getAllPeliculas(){
         //LLAMA A LOS METODOS DE LA INTERFACE
-        List<Peliculas> peliculas = this.peliculasRepository.findAll();
+        List<Pelicula> peliculas = this.peliculasRepository.findAll();
         return peliculas;
     }
     // Crear película
-    public Peliculas crearPelicula(Peliculas pelicula) {
+    public Pelicula crearPelicula(Pelicula pelicula) {
         return peliculasRepository.save(pelicula);
     }
 
@@ -36,7 +32,7 @@ public class MovieServices {
         peliculasRepository.deleteById(id);
     }
     //Obtener peliculas por el Id
-    public Peliculas getPeliculaById(int id) {
+    public Pelicula getPeliculaById(int id) {
         return peliculasRepository.findById(id).orElse(null);
     }
 
@@ -49,13 +45,13 @@ public class MovieServices {
         return url;
     }
 
-    public List<Peliculas>findByTitleAndGenero(String titulo, int idGenero){
+    public List<Pelicula>findByTitleAndGenero(String titulo, int idGenero){
         //segun tenga genero valido como parametro llama a un metodo de la interface u otro.
       if (idGenero==0)  {
-        List<Peliculas>peliculas= peliculasRepository.findByTituloContaining(titulo);
+        List<Pelicula>peliculas= peliculasRepository.findByTituloContaining(titulo);
         return peliculas;
       }else{
-          List<Peliculas>peliculas=peliculasRepository.findByTituloContainingAndGeneroId(titulo,idGenero);
+          List<Pelicula>peliculas=peliculasRepository.findByTituloContainingAndGeneroId(titulo,idGenero);
         return  peliculas;
       }
     }

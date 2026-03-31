@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Película</title>
-    <link rel="stylesheet" href="estiloNueva.css">
+
+    <link rel="stylesheet" th:href="@{/estiloNueva.css}">
+    <link rel="stylesheet" th:href="@{/estiloNavbar.css}">
+
+
 </head>
 
 <body>
 <span th:replace="fragment_navbar :: navBar"></span>
-<form th:action="@{/createMovie}" th:object="${pelicula}" method="post">
+<form th:action="@{/createMovie}" th:object="${pelicula}" method="post" class="formulario">
 
     <h2>Alta de Película</h2>
 
@@ -43,7 +47,7 @@
 
     </select>
 
-    <button type="submit">Guardar</button>
+    <button  class= "btnGuardar" type="submit">Guardar</button>
 
 </form>
 
