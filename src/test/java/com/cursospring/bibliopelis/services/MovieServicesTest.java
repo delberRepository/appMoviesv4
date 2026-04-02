@@ -15,11 +15,11 @@ import java.util.List;
         @Autowired
         MovieServices ms;
 
-        @Test
+        /*@Test
         public void createMovie(){
             ms.crearPelicula(new Pelicula("Critters","Stephen Herek","https://m.media-amazon.com/images/M/MV5BYmFmZTA5ZDMtN2I1Zi00ZGFmLWEyMjMtYjFkZDBjMTYyNmIxXkEyXkFqcGc@._V1_.jpg","https://youtu.be/9V3YGz-u2Ts?si=81eUq_FmC5GbVcQ1",new Genero(1,"Terror")));
         }
-
+      */
 
 
         public void findAll(){

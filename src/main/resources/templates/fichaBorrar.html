@@ -30,7 +30,7 @@
         </p>
         <p>
             <strong>Año:</strong>
-            <span th:text="${pelicula.anyo?.nombre}">anyo</span>
+            <span th:text="${pelicula.anyo}">Año</span>
         </p>
 
         <p>
@@ -41,6 +41,10 @@
         <p th:if="${pelicula.descripcion != null and !#strings.isEmpty(pelicula.descripcion)}">
             <strong>Descripción:</strong>
             <span th:text="${pelicula.descripcion}">Descripción</span>
+        </p>
+        <p>
+            <strong th:text="${mediaRating != null ? 'Valoración media:' : ''}"></strong>
+            <span th:text="${mediaRating != null ? #numbers.formatDecimal(mediaRating,1,1) : ''}"></span>
         </p>
 
        <!-- <p>

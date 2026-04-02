@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" th:href="@{/estiloLogin.css}">
+    <link rel="stylesheet" th:href="@{/estiloNavbar.css}">
+
+</head>
+<body>
+<span th:replace="fragment_navbar :: navBar"></span>
+<div class="card_login">
+    <h2>Crear cuenta</h2>
+
+    <form th:action="@{/register}" th:object="${usuario}" method="post" class="formulario">
+        <div>
+            <label>Usuario:</label>
+            <input type="text" name="username" th:field="*{username}" />
+        </div>
+        <div>
+            <label>Correo:</label>
+            <input type="text" name="correo" th:field="*{email}" />
+        </div>
+
+        <div>
+            <label>Contraseña:</label>
+            <input type="password" name="password" th:field="*{password}"/>
+        </div>
+
+        <button type="submit" class="botonRojo">Crear cuenta</button>
+    </form>
+    <div class="extra">
+        ¿Ya tienes cuenta? <a th:href="@{/login}">Entrar</a>
+    </div>
+</div>
+
+</body>
+</html>

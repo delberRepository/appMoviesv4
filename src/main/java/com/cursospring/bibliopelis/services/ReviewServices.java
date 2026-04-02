@@ -36,6 +36,9 @@ public class ReviewServices {
         return reviewRepository.findByPeliculaId(pelicula_id);
     }
 
+    public Double getMediaPelicula(int peliculaId) {
+        return reviewRepository.getMediaByPeliculaId(peliculaId);
+    }
     public void deleteReview(Integer id) {
         reviewRepository.deleteById(id);
     }

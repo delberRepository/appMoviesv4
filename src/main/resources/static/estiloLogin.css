@@ -1,0 +1,156 @@
+/* FONDO GENERAL (oscuro tipo Netflix) */
+*{
+    box-sizing:border-box;
+}
+
+/* BODY */
+body{
+    margin:0;
+    font-family:Arial;
+    background:#141414;
+    color:white;
+    overflow-x:hidden;
+}
+/* HEADER */
+header{
+    background:#141414;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+/* CONTENEDOR LOGIN */
+.card_login {
+    max-width: 380px;
+    margin: 120px auto;
+    padding: 40px 30px;
+    background:#222;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* TITULO */
+.card_login h2 {
+    margin: 0;
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* FORM */
+.card_login form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* LABELS */
+.card_login label {
+    font-size: 13px;
+    color: #bbb;
+}
+
+/* INPUTS */
+.card_login input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #dbeaf4;
+    color: #0b0b0b;
+    font-size: 14px;
+    transition: background-color 0.2s, outline 0.2s;
+}
+
+.card_login input:focus {
+    background-color: #dbeaf4;
+    outline: 2px solid #e50914;
+}
+input, select, textarea{
+    padding:10px;
+    border:none;
+    border-radius:4px;
+    width:100%;
+    background: #bbbbbb;
+}
+
+/* BOTON */
+.botonRojo {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #e50914;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.botonRojo:hover {
+    background-color: #ff1a1a;
+    transform: scale(1.03);
+}
+
+/* TEXTO EXTRA (registro) */
+.card_login .extra {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+}
+
+.card_login .extra a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card_login .extra a:hover {
+    text-decoration: underline;
+    color: #e50914;
+}
+/* --------------------------- */
+/* RESPONSIVE LOGIN */
+/* --------------------------- */
+
+@media (max-width: 600px) {
+
+    header{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+        width:100%;
+    }
+
+    .card_login {
+        margin: 80px 16px;       /* menos margen lateral */
+        padding: 25px 20px;      /* menos padding */
+        border-radius: 8px;
+    }
+
+    .card_login h2 {
+        font-size: 22px;
+    }
+
+    .card_login input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .botonRojo {
+        width: 100%;             /* botón ocupa todo */
+        padding: 12px;
+    }
+
+    .card_login .extra {
+        font-size: 12px;
+    }
+}

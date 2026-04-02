@@ -7,6 +7,7 @@ import com.cursospring.bibliopelis.model.Usuario;
 import com.cursospring.bibliopelis.services.GenereServices;
 import com.cursospring.bibliopelis.services.MovieServices;
 import com.cursospring.bibliopelis.services.ReviewServices;
+import com.cursospring.bibliopelis.services.UserServices;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ public class MainController {
     private GenereServices gs;
     private MovieServices ms;
     private ReviewServices rs;
+    private UserServices us;
 
 
     //aqui le inyecto el genereServices, es decir se inyectan servicios y repositorios
@@ -66,6 +68,10 @@ public class MainController {
         pelicula.setVideoUrl(videoId);
         // 🔥 AÑADIR REVIEWS
         List<Review> reviews = rs.getReviewsByPelicula(id);
+
+        //AQUI AÑADO LA MEDIA DE LAS PELIS
+        Double media = rs.getMediaPelicula(id);
+        model.addAttribute("mediaRating", media);
 
         model.addAttribute("pelicula", pelicula);
         model.addAttribute("reviews", reviews);
@@ -115,8 +121,23 @@ public class MainController {
 //LOGIN
     @GetMapping("/login")
     public String login() {
+
         return "login";
+    }
+ //CREAR USUARIO
+    @GetMapping("/register")
+
+        public String crearUsuario(Model model) {
+            model.addAttribute("usuario", new Usuario());
+            return "crearCuenta";
+        }
+    @PostMapping("/register")
+    public String crearUsuario(@ModelAttribute Usuario usuario){
+        this.us.crearUsuario(usuario);
+        return "redirect:/";
+    }
+
     }
 
 
-}
+
