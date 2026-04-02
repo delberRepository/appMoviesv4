@@ -21,30 +21,21 @@
     </div>
 -->
     <div class="info">
+        <div class="title-wrapper">
+            <h1 th:text="${pelicula.titulo}">Título</h1>
 
-        <h1 th:text="${pelicula.titulo}">Título</h1>
+            <div class="rating-badge" th:if="${mediaRating != null and mediaRating > 0}">
+                <span class="star">★</span>
+                <span th:text="${#numbers.formatDecimal(mediaRating, 1, 1)}">0.0</span>
+            </div>
+        </div>
 
-        <p>
-            <strong>Director:</strong>
-            <span th:text="${pelicula.director}">Director</span>
-        </p>
-        <p>
-            <strong>Año:</strong>
-            <span th:text="${pelicula.anyo}">Año</span>
-        </p>
-
-        <p>
-            <strong>Género:</strong>
-            <span th:text="${pelicula.genero?.nombre}">Genero</span>
-        </p>
+        <p><strong>Director:</strong> <span th:text="${pelicula.director}">Director</span></p>
+        <p><strong>Año:</strong> <span th:text="${pelicula.anyo}">Año</span></p>
+        <p><strong>Género:</strong> <span th:text="${pelicula.genero?.nombre}">Genero</span></p>
 
         <p th:if="${pelicula.descripcion != null and !#strings.isEmpty(pelicula.descripcion)}">
-            <strong>Descripción:</strong>
-            <span th:text="${pelicula.descripcion}">Descripción</span>
-        </p>
-        <p>
-            <strong th:text="${mediaRating != null ? 'Valoración media:' : ''}"></strong>
-            <span th:text="${mediaRating != null ? #numbers.formatDecimal(mediaRating,1,1) : ''}"></span>
+            <strong>Descripción:</strong> <span th:text="${pelicula.descripcion}">Descripción</span>
         </p>
 
        <!-- <p>

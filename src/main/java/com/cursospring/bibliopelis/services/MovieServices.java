@@ -1,19 +1,23 @@
 package com.cursospring.bibliopelis.services;
 
+import com.cursospring.bibliopelis.dto.PeliculaDTO;
 import com.cursospring.bibliopelis.model.Pelicula;
 import com.cursospring.bibliopelis.repository.IPeliculaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieServices {
 
     private IPeliculaRepository peliculasRepository;
+    private ReviewServices rv;
 
 
-    public MovieServices(IPeliculaRepository peliculasRepository) {
+    public MovieServices(IPeliculaRepository peliculasRepository,ReviewServices rv) {
         this.peliculasRepository = peliculasRepository;
+        this.rv = rv;
     }
 
     //OBTENER TODAS LAS PELICULAS
@@ -54,5 +58,15 @@ public class MovieServices {
           List<Pelicula>peliculas=peliculasRepository.findByTituloContainingAndGeneroId(titulo,idGenero);
         return  peliculas;
       }
+    }
+    // Transformamos la lista de Pelicula en PeliculaDTO
+
+    public List<PeliculaDTO> getAllPeliculasConMedia() {
+        List<Pelicula> peliculas = peliculasRepository.findAll();
+
+        return peliculas.stream().map(p -> {
+            Double media = rv.getMediaPelicula(p.getId());
+            return new PeliculaDTO(p, media);
+        }).collect(Collectors.toList());
     }
 }

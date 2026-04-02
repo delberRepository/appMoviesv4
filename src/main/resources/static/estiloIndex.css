@@ -91,15 +91,55 @@ img{
 }
 
 /* CONTENIDO CARD */
-.card-content{
-    padding:15px;
+
+.card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Apila el header y el botón verticalmente */
+    gap: 10px;
 }
 
-.card-title{
-    font-size:16px;
-    margin-bottom:15px;
+.card-header {
+    display: flex;
+    justify-content: space-between; /* Empuja el título a la izquierda y nota a la derecha */
+    align-items: flex-start; /* Alinea por la parte de arriba */
+    margin-bottom: 15px;
 }
 
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    flex: 1; /* Permite que el título ocupe el espacio necesario */
+    margin-right: 10px; /* Margen para que no choque con la nota */
+}
+
+/* ESTILO DE LA NOTA */
+.card-note {
+    background: rgba(229, 9, 20, 0.1); /* Un fondo rojo muy suave */
+    color: red; /* El rojo de tu botón */
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap; /* Evita que la nota se rompa en dos líneas */
+}
+
+.star {
+    font-size: 12px;
+    margin-right: 2px;
+}
+
+.btn {
+    background: #e50914;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center; /* Centra el texto dentro del botón */
+    display: inline-block;
+}
 /* BOTONES */
 button{
     background:#e50914;
@@ -114,15 +154,7 @@ button:hover{
     background:#f6121d;
 }
 
-.btn{
-    background:#e50914;
-    color:white;
-    padding:10px 16px;
-    border-radius:8px;
-    text-decoration:none;
-    border:none;
-    cursor:pointer;
-}
+
 
 /* BOTÓN CONTADOR */
 .btnCount{
@@ -183,8 +215,9 @@ button:hover{
     .search-bar select,
     .search-bar button,
     .btn{
-        width:100%;
+       display:none !important;
     }
+ 
 
     /* ocultar contador */
     .btnCount{
@@ -195,6 +228,6 @@ button:hover{
 
     /* tarjetas más pequeñas */
     .card img{
-        height:250px;
+        height:260px;
     }
 }

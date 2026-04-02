@@ -41,30 +41,28 @@
 </header>
 
 <div class="container">
-
     <div class="grid">
-
         <div class="card" th:each="p : ${peliculas}">
-            <a th:href="@{/verFicha/{id}(id=${p.id})}" >
-            <img th:src="${p.imgUrl}" alt="poster pelicula">
+
+            <a th:href="@{/verFicha/{id}(id=${p.id})}">
+                <img th:src="${p.imgUrl}" alt="poster pelicula">
             </a>
 
             <div class="card-content">
+                <div class="card-header">
+                    <div class="card-title" th:text="${p.titulo}">Título de la película</div>
 
-                <div class="card-title"
-                     th:text="${p.titulo}">
+                    <div class="card-note" th:if="${p.mediaRatingFormateada != ' '}">
+                        <span class="star" >★</span>
+                        <span th:text="${p.mediaRatingFormateada}">5</span>
+                    </div>
                 </div>
 
                 <a th:href="@{/verFicha/{id}(id=${p.id})}" class="btn">
                     Ver ficha
                 </a>
-                
             </div>
-
-        </div>
-
     </div>
-
 </div>
 
 </body>

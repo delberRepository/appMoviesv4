@@ -1,5 +1,6 @@
 package com.cursospring.bibliopelis.controller;
 
+import com.cursospring.bibliopelis.dto.PeliculaDTO;
 import com.cursospring.bibliopelis.model.Genero;
 import com.cursospring.bibliopelis.model.Pelicula;
 import com.cursospring.bibliopelis.model.Review;
@@ -15,7 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Controller
 public class MainController {
@@ -28,20 +33,17 @@ public class MainController {
     //aqui le inyecto el genereServices, es decir se inyectan servicios y repositorios
 
     @GetMapping("/")
-    public String getMainPage(Model model){
-
-        //OBTENER PELIS DEL SERVICIO y LOS AÑADE A OBJETO MODELO
+    public String getMainPage(Model model) {
+        // 1. Cargamos los datos básicos
         List<Genero> generosList = gs.getAllGeneros();
+        List<PeliculaDTO> peliculaList = ms.getAllPeliculasConMedia();
+        // 3. Pasamos todo al modelo
         model.addAttribute("generos", generosList);
-
-        //OBTENER PELIS DEL SERVICIO
-        List<Pelicula> peliculaList =ms.getAllPeliculas();
         model.addAttribute("peliculas", peliculaList);
 
 
         return "index";
     }
-
 
     @GetMapping("/createMovie")
     public String createMovie(Model model) {
