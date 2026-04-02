@@ -88,7 +88,7 @@ public class MainController {
    @PostMapping("/searchMovie")
     public String searchMovie(@RequestParam String searchTitle, @RequestParam Integer searchGenero,Model model){
        List<Genero> generosList = gs.getAllGeneros();
-       List<Pelicula> peliculaList =ms.findByTitleAndGenero(searchTitle,searchGenero);
+       List<PeliculaDTO> peliculaList =ms.findByTitleAndGenero(searchTitle,searchGenero);
        model.addAttribute("generos",generosList);
        model.addAttribute("peliculas", peliculaList);
        return"index";

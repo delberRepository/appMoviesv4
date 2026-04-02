@@ -69,4 +69,14 @@ public class MovieServices {
             return new PeliculaDTO(p, media);
         }).collect(Collectors.toList());
     }
+    public List<PeliculaDTO> findByTitleAndGenero(String title, Integer generoId) {
+        // 1. Buscamos las entidades en la DB
+        List<Pelicula> entidades = peliculasRepository.findByTituloContainingAndGeneroId(title, generoId);
+
+        // 2. Las transformamos a DTOs con su nota media
+        return entidades.stream().map(p -> {
+            Double media = rv.getMediaPelicula(p.getId());
+            return new PeliculaDTO(p, media); // Aquí se crea la magia de 'mediaRatingFormateada'
+        }).collect(Collectors.toList());
+    }
 }
