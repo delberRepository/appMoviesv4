@@ -6,17 +6,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 //APIREST
+
 @RestController
 @RequestMapping("/reviews")
 public class ReviewController {
-
+/*
     private final ReviewServices reviewService;
 
     public ReviewController(ReviewServices reviewService) {
         this.reviewService = reviewService;
     }
 
-    @PostMapping
+   @PostMapping
     public Review crearReview(@RequestBody Review review) {
         return reviewService.crearReview(review);
     }
@@ -30,4 +31,6 @@ public class ReviewController {
     public void deleteReview(@PathVariable Integer id) {
         reviewService.deleteReview(id);
     }
+
+ */
 }

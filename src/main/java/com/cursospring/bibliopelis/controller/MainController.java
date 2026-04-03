@@ -46,7 +46,7 @@ public class MainController {
     }
 
     @GetMapping("/createMovie")
-    public String createMovie(Model model) {
+    public String createMovieForm(Model model) {
         model.addAttribute("pelicula", new Pelicula());
 
         //OBTENER PELIS DEL SERVICIO y LOS AÑADE A OBJETO MODELO
@@ -56,7 +56,7 @@ public class MainController {
     }
 
     @PostMapping("/createMovie")
-    public String createMovie(@ModelAttribute Pelicula pelicula){
+    public String createMovieSubmit(@ModelAttribute Pelicula pelicula) {
         this.ms.crearPelicula(pelicula);
         return "redirect:/";
     }
@@ -115,11 +115,11 @@ public class MainController {
 
         review.setUsuario(usuario);
         review.setPelicula(pelicula);
-
-        rs.crearReview(review);
-
+//aqui aplico la logica para que me redirija al index en caso de que exista reseña
+        boolean creada = rs.crearReview(review);
+        if (!creada) return "redirect:/";
         return "redirect:/verFicha/" + peliculaId;
-    }
+                            }
 //LOGIN
     @GetMapping("/login")
     public String login() {
@@ -139,7 +139,6 @@ public class MainController {
         return "redirect:/";
     }
 
-    }
-
+}
 
 

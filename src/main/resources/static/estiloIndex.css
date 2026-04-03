@@ -141,13 +141,14 @@ img{
     display: inline-block;
 }
 /* BOTONES */
-button{
+button,.btnCrear{
     background:#e50914;
     border:none;
     color:white;
     padding:8px 12px;
     border-radius:4px;
     cursor:pointer;
+    text-decoration: none;
 }
 
 button:hover{
@@ -178,6 +179,9 @@ button:hover{
 @media(max-width:700px){
     .grid{
         grid-template-columns:repeat(2,1fr);
+    }
+    .btnCount{
+        display:none;
     }
 }
 
@@ -210,19 +214,25 @@ button:hover{
         gap:10px;
     }
 
-    /* todos los elementos del header mismo ancho */
-    .search-bar input,
-    .search-bar select,
-    .search-bar button,
-    .btn{
-       display:none !important;
-    }
+	    /* todos los elementos del header mismo ancho */
+	    .search-bar input,
+	    .search-bar select,
+	    .search-bar button,
+	    .btn{
+	       width: 100%;
+	       max-width: 100%;
+	       display: block;
+	    }
+
+	    .btn{
+	        text-align: center;
+	    }
 
 
-    /* ocultar contador */
-    .btnCount{
-        display:none;
-    }
+	    /* ocultar contador */
+	    .search-bar button.btnCount{
+	        display:none !important;
+	    }
 
 
 

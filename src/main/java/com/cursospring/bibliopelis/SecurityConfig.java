@@ -16,8 +16,23 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // solo para desarrollo
-                        .anyRequest().authenticated()
+                        // Public pages + static assets (your CSS is served from "/estilo*.css")
+                        .requestMatchers(
+                                "/",
+                                "/login",
+                                "/register",
+                                "/*.css",
+                                "/*.js",
+                                "/*.png",
+                                "/*.jpg",
+                                "/*.jpeg",
+                                "/*.svg",
+                                "/*.ico",
+                                "/webjars/**"
+                        ).permitAll()
+                        // Protected pages/actions
+                        .requestMatchers("/createMovie/**", "/addReview/**", "/deleteMovie/**").authenticated()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")

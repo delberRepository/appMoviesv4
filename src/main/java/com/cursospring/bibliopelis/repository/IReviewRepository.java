@@ -12,4 +12,5 @@ public interface IReviewRepository extends JpaRepository<Review,Integer> {
     List<Review> findByPeliculaId(@Param("peliculaId") Integer peliculaId);
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.pelicula.id = :peliculaId")
     Double getMediaByPeliculaId(@Param("peliculaId") int peliculaId);
+    boolean existsByUsuarioIdAndPeliculaId(int usuarioId, int peliculaId);
 }

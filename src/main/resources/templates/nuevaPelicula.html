@@ -7,41 +7,51 @@
 
     <link rel="stylesheet" th:href="@{/estiloNueva.css}">
     <link rel="stylesheet" th:href="@{/estiloNavbar.css}">
+    <script th:src="@{/nuevaPelicula.js}" defer></script>
 
 
 </head>
 
 <body>
 <span th:replace="fragment_navbar :: navBar"></span>
-<form th:action="@{/createMovie}" th:object="${pelicula}" method="post" class="formulario">
+<form th:action="@{/createMovie}" th:object="${pelicula}" method="post" class="formulario" id="createMovieForm" novalidate>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
     <h2>Alta de Película</h2>
 
     <input type="text"
            placeholder="Título"
-           th:field="*{titulo}">
+           th:field="*{titulo}"
+           required>
 
     <input type="text"
            placeholder="Director"
-           th:field="*{director}">
-    <input type="text"
+           th:field="*{director}"
+           required>
+    <input type="number"
            placeholder="Año"
-           th:field="*{anyo}">
+           th:field="*{anyo}"
+           min="1888"
+           max="2100"
+           required>
 
-    <input type="text"
+    <input type="url"
            placeholder="URL de imagen"
-           th:field="*{imgUrl}">
+           th:field="*{imgUrl}"
+           required>
 
-    <input type="text"
+    <input type="url"
            placeholder="URL video"
-           th:field="*{videoUrl}">
+           th:field="*{videoUrl}"
+           required>
 
     <textarea placeholder="Descripción"
               th:field="*{descripcion}"
-              rows="4"></textarea>
+              rows="4"
+              required></textarea>
     <!-- Campo género -->
-    <select th:field="*{genero}">
-        <option value="">Selecciona un género</option>
+    <select th:field="*{genero}" required>
+        <option value="" selected disabled>Selecciona un género</option>
 
         <option th:each="g : ${generos}"
                 th:value="${g.id}"

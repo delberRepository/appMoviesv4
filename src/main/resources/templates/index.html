@@ -16,6 +16,7 @@
 
     <div class="search-bar">
         <form th:action="@{/searchMovie}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
           <!--Aqui le estoy pasando un parametro con el numero de pelis que estan cargadas-->
             <button class="btnCount" th:text="${#lists.size(peliculas)}"></button>
             <select name="searchGenero">
@@ -34,8 +35,9 @@
 
         </form>
 
-        <a th:href="@{/createMovie}" class="btn">Nueva película</a>
-    </div>
+        <a th:href="@{/createMovie}" class="btnCrear">
+            Nueva película
+        </a>    </div>
 
 
 </header>

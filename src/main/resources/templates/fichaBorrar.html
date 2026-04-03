@@ -101,17 +101,18 @@
 </div>
 <!--esto solo se carga si el usuario esta logueado-->
 
-<div  class="reviews-container"  sec:authorize="isAuthenticated()">
-    <div class="reviews-container" sec:authorize="isAnonymous()">
-        <p>Debes <a th:href="@{/login}">iniciar sesión</a> para añadir una reseña.</p>
-    </div>
+<div class="reviews-container" sec:authorize="isAnonymous()">
+    <p>Debes <a th:href="@{/login}">iniciar sesión</a> para añadir una reseña.</p>
+</div>
 
+<div class="reviews-container" sec:authorize="isAuthenticated()">
     <!-- Formulario para añadir nueva review -->
     <h3 class="reviews-title" th:if="${reviews.isEmpty()}">
         SE EL PRIMERO EN AÑADIR UNA RESEÑA
     </h3>
    <h3 class="reviews-title" th:if="${reviews != null and !reviews.isEmpty()}">AÑADE UNA RESEÑA</h3>
     <form th:action="@{/addReview}" method="post" class="review-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <input type="hidden" name="peliculaId" th:value="${pelicula.id}" />
 
         <div class="form-group">
