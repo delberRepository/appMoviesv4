@@ -10,7 +10,10 @@ body{
 }
 
 
-
+a{
+    text-decoration: none;
+    color: red;
+}
 .logo{
     color:#e50914;
     font-size:22px;
@@ -132,10 +135,12 @@ h1{
     opacity:0.9;
 }
 .reviews-container {
+
     max-width: 800px;
     margin: 40px auto;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background:#141414;
+    margin-top: 10px;
 }
 
 .reviews-title {
@@ -326,6 +331,7 @@ h1{
     .reviews-container{
      padding:16px;
      margin:5px;
+
     }
 
     .info{

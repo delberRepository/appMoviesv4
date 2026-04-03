@@ -35,9 +35,9 @@
 
         </form>
 
-        <a th:href="@{/createMovie}" class="btnCrear">
-            Nueva película
-        </a>    </div>
+        <a th:href="@{/createMovie}" class="btnCrear"  sec:authorize="isAuthenticated()">Nueva película</a>
+
+    </div>
 
 
 </header>

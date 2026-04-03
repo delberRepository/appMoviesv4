@@ -26,10 +26,9 @@ public class PeliculaDTO {
         if (media == null || media == 0) {
             this.mediaRatingFormateada = " ";
         } else {
-            // Si el resto de dividir por 1 es 0, es un entero (ej: 5.0 -> 5)
-            this.mediaRatingFormateada = (media % 1 == 0)
-                    ? String.valueOf(media.intValue())
-                    : String.valueOf(media);
+            java.text.DecimalFormat df = new java.text.DecimalFormat("0.#"); // 1 decimal max, quita el .0
+            df.setRoundingMode(java.math.RoundingMode.HALF_UP);
+            this.mediaRatingFormateada = df.format(media);
         }
     }
 }

@@ -102,7 +102,7 @@
 <!--esto solo se carga si el usuario esta logueado-->
 
 <div class="reviews-container" sec:authorize="isAnonymous()">
-    <p>Debes <a th:href="@{/login}">iniciar sesión</a> para añadir una reseña.</p>
+    <p> <a th:href="@{/login}">Iniciar sesión</a> para añadir una reseña.</p>
 </div>
 
 <div class="reviews-container" sec:authorize="isAuthenticated()">
